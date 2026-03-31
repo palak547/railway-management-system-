@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search Trains</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <h2>Update Profile</h2>
+
+    <form method="POST">
+        First Name: <input type="text" name="first_name" required><br><br>
+        Last Name: <input type="text" name="last_name" required><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/dashboard">Back</a>
+</body>
+</html>
