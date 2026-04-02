@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Trains</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search Trains</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+<div class="container">
+    <h2>Search Trains</h2>
+
+    <form method="POST">
+        <input type="text" name="source" placeholder="Source">
+        <input type="text" name="destination" placeholder="Destination">
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    {% if trains %}
+        <h3>Available Trains</h3>
+        {% for train in trains %}
+            <div class="container" style="margin-top:20px;">
+                <p><b>{{ train.train_no }} - {{ train.name }}</b></p>
+                <p>{{ train.source }} → {{ train.destination }}</p>
+                <p>Seats Available: {{ train.seats_available }}</p>
+                <p>Fare: ₹{{ train.fare }}</p>
+
+
+                <form action="/book/{{ train.train_no }}">
+                    <button type="submit">Book</button>
+                </form>
+                <br>
+                <a href="/route/{{ train.train_no }}">
+                    <button>View Route</button>
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+</body>
+</html>

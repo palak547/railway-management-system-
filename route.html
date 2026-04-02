@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search Trains</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+<div class="container">
+    <h2>Train Route (Train {{ train_no }})</h2>
+
+<table border="1">
+<tr>
+    <th>Station</th>
+    <th>Arrival Time</th>
+    <th>Halt (min)</th>
+</tr>
+
+{% for r in route %}
+<tr>
+    <td>{{ r.name }}</td>
+    <td>{{ r.arrival_time }}</td>
+    <td>{{ r.halt }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+</body>
+</html>

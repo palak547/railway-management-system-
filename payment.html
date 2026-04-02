@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search Trains</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+<div class="container">
+    <h2>Payment</h2>
+
+    <form method="POST" action="/payment/{{ ticket_id }}">
+    
+        <input type="text" value="{{ ticket_id }}" readonly>
+    
+        <select name="mode">
+            <option>UPI</option>
+            <option>Card</option>
+        </select>
+    
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+
+</body>
+</html>

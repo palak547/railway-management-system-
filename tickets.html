@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Tickets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search Trains</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+    
+    <div class="container">
+        <h2>My Tickets</h2>
+    
+        {% if tickets %}
+            {% for t in tickets %}
+                <div class="ticket-card">
+                    <p><b>Ticket ID:</b> {{ t.ticket_id }}</p>
+                    <p><b>Passengers:</b> {{ t.no_of_passengers }}</p>
+                    <p><b>Train:</b> {{ t.train_name }}</p>
+                    <p><b>Route:</b> {{ t.source }} → {{ t.destination }}</p>
+                    <p><b>Seat:</b> {{ t.seat_number if t.seat_number else "Not Assigned" }}</p>
+                    <p><b>Payment:</b> 
+                        {% if t.payment_status == "Success" %}
+                            Paid
+                        {% else %}
+                            Pending
+                        {% endif %}
+                    </p>
+                    
+                    <br>
+                    
+                    {% if t.payment_status == "Success" %}
+                        <button disabled>Paid</button>
+                    {% else %}
+                        <a href="/payment/{{ t.ticket_id }}">
+                            <button>Pay Now</button>
+                        </a>
+                    {% endif %}
+                    <br>
+    
+                    <a href="/delete_ticket/{{ t.ticket_id }}">
+                        <button class="cancel-btn">Cancel Ticket</button>
+                    </a>
+                    <br>
+                    
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No tickets found.</p>
+        {% endif %}
+        <br>
+    
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+    
+    </body>
+</html>
